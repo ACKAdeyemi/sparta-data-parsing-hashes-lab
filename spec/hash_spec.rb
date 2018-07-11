@@ -50,13 +50,22 @@ describe 'Create tests for a hash' do
 
   it 'each fruit should have 4 keys' do
     expect(small_fruit_nutrition_details[:apple].keys.length).to eql 4
+    # p small_fruit_nutrition_details[:apple].keys.class
   end
 
   it 'all calories should be between 40 to 150' do
-    expect(small_fruit_nutrition_details[:apple][:calories]).to be_between(40,150)
-    expect(small_fruit_nutrition_details[:avocado][:calories]).to be_between(40,150)
-    expect(small_fruit_nutrition_details[:kiwifruit][:calories]).to be_between(40,150)
-    expect(small_fruit_nutrition_details[:plums][:calories]).to be_between(40,150)
+    small_fruit_nutrition_details.each do |key, value|
+      p "Key = #{key}"
+      p "Value = #{value}"
+      value.each do |k, v|
+        p "K = #{k}"
+        p "V = #{v}"
+        if k == :calories
+          expect(v).to be_between(40,150)
+        end
+      end
+    end
+
   end
 
 end
